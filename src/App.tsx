@@ -2,24 +2,23 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TodoBoard from "./components/todoBoard/TodoBoard";
+import {Stack} from '@mui/material';
 
 function App() {
     return (
-        <div style={{
+        <Stack style={{
             backgroundColor: '#DCDCDC',
             width: '100%',
             height: '100%',
             position: 'absolute'
-        }}>
+        }} justifyContent='center' alignItems='center'>
             <TodoBoard boardStyle={{
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                position: 'absolute',
-                
+
+                // transform: 'translate(-50%, -50%)',
+
 
             }}/>
-        </div>
+        </Stack>
     );
 }
 
