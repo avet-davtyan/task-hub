@@ -1,12 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TodoBoard from "./components/todoBoard/TodoBoard";
-import {Stack} from '@mui/material';
-// @ts-ignore
-import {DragDropContext} from 'react-beautiful-dnd';
+import Todos from "./components/mainTodoBoardList/Todos";
+import {Button} from "@mui/material";
+import {useRef} from "react";
 
-const boardConfigs = [
+const _boardConfigs = [
     {
         // boardStyle: {position: 'absolute'},
         tasks: [
@@ -28,27 +25,24 @@ const boardConfigs = [
         tasks: [
             {task_id: 100, name: 'second board 5'},
             {task_id: 200, name: 'second board 7'},
-            {task_id: 300, name: 'ssssssss'}
+            {task_id: 300, name: 'third board 8'}
         ],
         droppableId: '3'
     }
 ]
 
+
 function App() {
+
+    const todoRef = useRef<any>();
     return (
 
-        <Stack direction='row'>
-            <DragDropContext>
-                {boardConfigs.map(boardConfig => (
-                    <TodoBoard key={boardConfig.droppableId}
-                               boardStyle={boardConfig?.boardStyle}
-                               initialTasks={boardConfig?.tasks}
-                               droppableId={boardConfig?.droppableId}
-
-                    />
-                ))}
-            </DragDropContext>
-        </Stack>
+        <>
+            <Button variant='contained' onClick={() => {
+                console.log(todoRef.current.getMyState());
+            }}>info about state</Button>
+            <Todos configs={_boardConfigs} ref={todoRef}/>
+        </>
     );
 }
 
