@@ -27,28 +27,62 @@ const TodoBoard = ({
                                {task_id: 2, name: 'firstBoard 2'}
                            ]
                        }],
+                       setTodoBoards = '' as any,
                        TaskRenderer = CustomTaskRenderer,
                        AddButton = CustomAddButton,
                        TaskTextField = CustomTextField,
                        boardId = 'defaultId',
-                       initialTasks = [{task_id: 1, name: 'task'}]
+                       tasks = [{task_id: 1, name: 'task'}]
                    }) => {
 
-    const [tasks, setTasks] = useState<any[]>(initialTasks)
 
     const [text, setText] = useState<string>('');
     const [showDelEdit, setShowDelEdit] = useState<boolean>(false);
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value)
     }
-    const addTask = () => {
-        if (text) setTasks([...tasks, {name: text, task_id: Math.random()}]);
-        console.log('add')
-        setText('');
+
+    const AddTask = () => {
+
+        const addTask = {task_id: Math.random(), name: text};
+        const boardIndex = todoBoards.findIndex((board) => board.board_id === boardId);
+
+        if (boardIndex !== -1) {
+            const updatedBoard = {...todoBoards[boardIndex]};
+            updatedBoard.tasks.push(addTask);
+            const updatedBoards = [...todoBoards];
+            updatedBoards[boardIndex] = updatedBoard;
+            setTodoBoards(updatedBoards);
+        }
     }
-    const handleDelete = (task: any) => {
-        setTasks(tasks.filter(_task => _task.task_id !== task.task_id));
+
+    const DeleteTask = (taskToDelete: any) => {
+        const boardIndex = todoBoards.findIndex((board) => board.board_id === boardId);
+
+        if (boardIndex !== -1) {
+            // Clone the board to avoid directly modifying the state
+            const updatedBoard = {...todoBoards[boardIndex]};
+
+            // Find the index of the task to delete in the tasks array
+            const taskIndex = updatedBoard.tasks.findIndex(
+                (task) => task.task_id === taskToDelete.task_id
+            );
+
+            if (taskIndex !== -1) {
+                // Remove the task from the tasks array
+                updatedBoard.tasks.splice(taskIndex, 1);
+
+                // Update the state with the modified board
+                const updatedBoards = [...todoBoards];
+                updatedBoards[boardIndex] = updatedBoard;
+
+                // Set the state with the updated data
+                setTodoBoards(updatedBoards);
+            }
+        }
     }
+
+
     return (
 
         <Card sx={{
@@ -62,7 +96,7 @@ const TodoBoard = ({
             }} spacing={3}>
                 <Stack direction='row' spacing={1}>
                     <TaskTextField handleChange={handleChange}/>
-                    <AddButton handleAddTask={addTask}/>
+                    <AddButton handleAddTask={AddTask}/>
                 </Stack>
 
 
@@ -74,7 +108,7 @@ const TodoBoard = ({
 
                         >
                             {tasks.map((task, index) => (
-                                <Draggable key={task.task_id} draggableId={task.task_id.toString()} index={index}>
+                                <Draggable key={task.task_id} draggableId={task?.task_id.toString()} index={index}>
                                     {(provided: any, snapshot: any) => (
                                         <div
                                             ref={provided.innerRef}
@@ -84,9 +118,9 @@ const TodoBoard = ({
                                             <Stack sx={{
                                                 height: '50px',
                                                 position: 'relative',
-
+                                                m: 0.3
                                             }}>
-                                                <TaskRenderer task={task} handleDelete={handleDelete}/>
+                                                <TaskRenderer task={task} handleDelete={DeleteTask}/>
                                             </Stack>
                                         </div>
                                     )}
