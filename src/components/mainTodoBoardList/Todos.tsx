@@ -6,14 +6,15 @@ import {forwardRef} from "react";
 import {DragDropContext} from 'react-beautiful-dnd';
 import {Button} from "@mui/material";
 
-const Todos = forwardRef(({configs = []}: { configs: any }, ref) => {
+const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any }, ref) => {
 
-    const [boardConfigs, setBoardConfigs] = useState(configs);
+    const [todoBoards, setTodoBoards] = useState(boards);
+
     useImperativeHandle(ref, () => ({
         getMyState: () => {
-            return boardConfigs
+            return todoBoards
         }
-    }), [boardConfigs]);
+    }), [todoBoards]);
 
     const handleDragDrop = (result: any) => {
         console.log(result);
@@ -22,15 +23,14 @@ const Todos = forwardRef(({configs = []}: { configs: any }, ref) => {
     return (
 
         <Stack direction='row'>
-            <Button onClick={() => {
-                setBoardConfigs([...boardConfigs.slice(2)])
-            }}>delete</Button>
             <DragDropContext onDragEnd={handleDragDrop}>
-                {boardConfigs.map((boardConfig: any) => (
-                    <TodoBoard key={boardConfig.droppableId}
-                               boardStyle={boardConfig?.boardStyle}
-                               initialTasks={boardConfig?.tasks}
-                               droppableId={boardConfig?.droppableId}
+                {todoBoards.map((todoBoard: any) => (
+                    <TodoBoard key={todoBoard.droppableId}
+                               boardStyle={styles[todoBoard?.board_id]}
+                               initialTasks={todoBoard?.tasks}
+                               boardId={todoBoard?.board_id}
+                               todoBoards={todoBoards}
+
                     />
                 ))}
             </DragDropContext>

@@ -20,10 +20,17 @@ interface task {
 
 const TodoBoard = ({
                        boardStyle = {} as any,
+                       todoBoards = [{
+                           board_id: '1',
+                           tasks: [
+                               {task_id: 1, name: 'firstBoard 1'},
+                               {task_id: 2, name: 'firstBoard 2'}
+                           ]
+                       }],
                        TaskRenderer = CustomTaskRenderer,
                        AddButton = CustomAddButton,
                        TaskTextField = CustomTextField,
-                       droppableId = 'droppable',
+                       boardId = 'defaultId',
                        initialTasks = [{task_id: 1, name: 'task'}]
                    }) => {
 
@@ -42,17 +49,6 @@ const TodoBoard = ({
     const handleDelete = (task: any) => {
         setTasks(tasks.filter(_task => _task.task_id !== task.task_id));
     }
-
-    const grid = 8;
-    const handleDragDrop = (results: any) => {
-        if (!results.destination) return;
-        const items = Array.from(tasks);
-        const [reorderedItem] = items.splice(results.source.index, 1);
-        items.splice(results.destination.index, 0, reorderedItem);
-        setTasks(items);
-    }
-
-
     return (
 
         <Card sx={{
@@ -70,7 +66,7 @@ const TodoBoard = ({
                 </Stack>
 
 
-                <Droppable droppableId={droppableId}>
+                <Droppable droppableId={boardId}>
                     {(provided: any, snapshot: any) => (
                         <Stack
                             {...provided.droppableProps}
