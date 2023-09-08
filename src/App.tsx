@@ -39,14 +39,13 @@ const boards = [
 
 const styles = {
     '1': {
-        border: '2px solid black',
+        border: '0px solid black',
     },
     '2': {
-        border: '2px solid black',
+        border: '0px solid black',
     },
     '3': {
-        backgroundColor: '#DADADA',
-        border: '2px solid black',
+        border: '0px solid black',
     }
 }
 
@@ -61,7 +60,7 @@ function App() {
     const todoRef = useRef<any>();
     return (
         <>
-            <Stack sx={{position: 'absolute', height: '100%', width: '100%'}}
+            <Stack sx={{position: 'absolute', height: '100%', width: '100%', backgroundColor: 'gray'}}
                    alignItems='center'>
                 <Todos boards={boards} styles={styles} renderers={renderers} ref={todoRef}/>
             </Stack>

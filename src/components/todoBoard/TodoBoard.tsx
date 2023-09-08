@@ -10,6 +10,7 @@ import CustomTextField from "./CustomTextField";
 // @ts-ignore
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {task, todoBoard, TodoBoardType} from "../types/types";
+import AddPart from "./AddPart";
 
 const TodoBoard = ({
                        boardStyle,
@@ -29,9 +30,9 @@ const TodoBoard = ({
         setText(e.target.value)
     }
 
-    const AddTask = () => {
+    const AddTask = (task: task) => {
 
-        const addTask: task = {task_id: Math.random(), name: text};
+        const addTask: task = task;
         const boardIndex: number = todoBoards.findIndex((board: todoBoard) => board.board_id === boardId);
 
         if (boardIndex !== -1) {
@@ -43,7 +44,7 @@ const TodoBoard = ({
         }
     }
 
-    const DeleteTask = (taskToDelete: any) => {
+    const DeleteTask = (taskToDelete: task) => {
         const boardIndex: number = todoBoards.findIndex((board: todoBoard) => board.board_id === boardId);
 
         if (boardIndex !== -1) {
@@ -54,6 +55,24 @@ const TodoBoard = ({
             if (taskIndex !== -1) {
                 updatedBoard.tasks.splice(taskIndex, 1);
                 const updatedBoards: todoBoard[] = [...todoBoards];
+                updatedBoards[boardIndex] = updatedBoard;
+                setTodoBoards(updatedBoards);
+            }
+        }
+    }
+
+    const UpdateTask = (taskToUpdate: task, updatedTask: task) => {
+        const boardIndex: number = todoBoards.findIndex((board: todoBoard) => board.board_id === boardId);
+
+        if (boardIndex !== -1) {
+            const updatedBoard: todoBoard = {...todoBoards[boardIndex]};
+            const taskToUpdateIndex: number = updatedBoard.tasks.findIndex(
+                (task: task) => task.task_id === taskToUpdate.task_id
+            );
+
+            if (taskToUpdateIndex !== -1) {
+                updatedBoard.tasks[taskToUpdateIndex] = updatedTask;
+                const updatedBoards = [...todoBoards];
                 updatedBoards[boardIndex] = updatedBoard;
                 setTodoBoards(updatedBoards);
             }
@@ -73,11 +92,11 @@ const TodoBoard = ({
                 width: '100%',
                 height: '100%'
             }} spacing={3}>
-                <Stack direction='row' spacing={1}>
-                    <TaskTextField handleChange={handleChange}/>
-                    <AddButton handleAddTask={AddTask}/>
-                </Stack>
-
+                {/*<Stack direction='row' spacing={1}>*/}
+                {/*    <TaskTextField handleChange={handleChange}/>*/}
+                {/*    <AddButton handleAddTask={AddTask}/>*/}
+                {/*</Stack>*/}
+                <AddPart handleAddTask={AddTask}/>
 
                 <Droppable droppableId={boardId}>
                     {(provided: any, snapshot: any) => (
@@ -97,7 +116,8 @@ const TodoBoard = ({
                                             <Stack sx={{
                                                 position: 'relative',
                                             }}>
-                                                <TaskRenderer task={task} handleDelete={DeleteTask}/>
+                                                <TaskRenderer task={task} handleDelete={DeleteTask}
+                                                              handleUpdate={UpdateTask}/>
                                             </Stack>
                                         </div>
                                     )}
@@ -107,6 +127,7 @@ const TodoBoard = ({
                         </Stack>
                     )}
                 </Droppable>
+
             </Stack>
         </Card>
 

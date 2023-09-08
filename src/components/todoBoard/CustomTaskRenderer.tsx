@@ -4,8 +4,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {CSSObject} from '@emotion/react';
 import {useTheme} from "@mui/material";
+import {task} from "../types/types";
 
-const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any }) => {
+const CustomTaskRenderer = ({task, handleDelete, handleUpdate}: {
+    task: task, handleDelete: (taskToDelete: task) => void,
+    handleUpdate: (taskToUpdate: task, updatedTask: task) => void
+}) => {
     const theme = useTheme();
     const [showEditDel, setShowEditDel] = useState<boolean>(false);
 
@@ -34,7 +38,9 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
                     height: '100%',
 
                 }} direction='row'>
-                    <Button style={{width: '50%', minWidth: 0}}>
+                    <Button style={{width: '50%', minWidth: 0}} onClick={() => {
+                        handleUpdate(task, {...task, name: 'updated'})
+                    }}>
                         <EditIcon style={{color: theme.palette.primary.main}}/>
                     </Button>
                     <Button style={{width: '50%', minWidth: 0}}

@@ -10,13 +10,16 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
     const [showEditDel, setShowEditDel] = useState<boolean>(false);
 
     return (
-        <Card sx={{
+        <div style={{
             height: '50px',
-            m: 0.3,
+            margin: '5px',
             position: 'relative',
             backgroundColor: '#FCFCFC',
+            border: '2px solid black',
+            borderRadius: '3px'
+
         }}
-              variant='outlined'
+
         >
             <Stack sx={{
                 width: '100%',
@@ -45,7 +48,7 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
                     </Button>
                 </Stack>
             </Stack>
-        </Card>
+        </div>
     )
 }
 
