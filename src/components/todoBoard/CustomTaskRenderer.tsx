@@ -15,12 +15,6 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
             backgroundColor: '#FCFCFC',
 
         }} variant='outlined'
-              onMouseEnter={() => {
-                  setShowEditDel(true);
-              }}
-              onMouseLeave={() => {
-                  setShowEditDel(false);
-              }}
         >
             <Stack sx={{
                 width: '100%',

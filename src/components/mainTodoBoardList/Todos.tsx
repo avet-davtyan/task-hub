@@ -6,6 +6,8 @@ import {forwardRef} from "react";
 import {DragDropContext} from 'react-beautiful-dnd';
 import {Button} from "@mui/material";
 
+import {flushSync} from "react-dom";
+
 const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any }, ref) => {
 
     const [todoBoards, setTodoBoards] = useState(boards);
@@ -18,7 +20,7 @@ const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any
 
     const handleDragDrop = (result: any) => {
 
-        if (!result.destination) return;
+        if (!result.destination || !result.source) return;
 
         const source = {index: result.source.index, board_id: result.source.droppableId}
         const destination = {index: result.destination.index, board_id: result.destination.droppableId}
@@ -49,13 +51,15 @@ const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any
             );
 
             // Set the state with the updated data
-            setTodoBoards(updatedBoards);
+            flushSync(() => {
+                setTodoBoards(updatedBoards);
+            });
         }
     }
 
     return (
 
-        <Stack direction='row'>
+        <Stack direction='row' alignItems="flex-start">
             <DragDropContext onDragEnd={handleDragDrop}>
                 {todoBoards.map((todoBoard: any) => (
                     <TodoBoard key={todoBoard.board_id}

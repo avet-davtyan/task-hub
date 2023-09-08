@@ -88,6 +88,7 @@ const TodoBoard = ({
         <Card sx={{
             width: '400px',
             padding: '30px 20px 30px 20px',
+            margin: '10px',
             ...boardStyle,
         }}>
             <Stack sx={{
