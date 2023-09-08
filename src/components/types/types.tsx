@@ -18,8 +18,6 @@ export interface TodoBoardType {
     todoBoards: todoBoard[],
     setTodoBoards: React.Dispatch<React.SetStateAction<todoBoard[]>>,
     TaskRenderer?: React.FunctionComponent<any>;
-    AddButton?: React.FunctionComponent<any>;
-    TaskTextField?: React.FunctionComponent<any>;
     boardId: string,
     tasks?: task[],
 }

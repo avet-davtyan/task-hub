@@ -17,8 +17,6 @@ const TodoBoard = ({
                        todoBoards,
                        setTodoBoards,
                        TaskRenderer = CustomTaskRenderer,
-                       AddButton = CustomAddButton,
-                       TaskTextField = CustomTextField,
                        boardId,
                        tasks
                    }: TodoBoardType) => {
@@ -81,11 +79,13 @@ const TodoBoard = ({
 
 
     return (
-
-        <Card sx={{
+        <div style={{
             width: '400px',
             padding: '30px 20px 30px 20px',
             margin: '10px',
+            backgroundColor: 'white',
+            borderRadius: '4px',
+            boxShadow: 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px',
             ...boardStyle,
         }}>
             <Stack sx={{
@@ -129,7 +129,7 @@ const TodoBoard = ({
                 </Droppable>
 
             </Stack>
-        </Card>
+        </div>
 
     )
 }
