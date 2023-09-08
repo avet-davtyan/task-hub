@@ -95,9 +95,7 @@ const TodoBoard = ({
                                             {...provided.dragHandleProps}
                                         >
                                             <Stack sx={{
-                                                height: '50px',
                                                 position: 'relative',
-                                                m: 0.3
                                             }}>
                                                 <TaskRenderer task={task} handleDelete={DeleteTask}/>
                                             </Stack>

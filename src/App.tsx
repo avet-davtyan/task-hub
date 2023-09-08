@@ -3,6 +3,7 @@ import Todos from "./components/mainTodoBoardList/Todos";
 import {Stack} from "@mui/material";
 import {Button} from "@mui/material";
 import {useRef} from "react";
+import CustomTaskRenderer from "./components/CustomTodos/CustomTaskRenderer";
 
 
 const boards = [
@@ -43,8 +44,16 @@ const styles = {
     '2': {
         border: '2px solid black',
     },
+    '3': {
+        backgroundColor: '#DADADA',
+        border: '2px solid black',
+    }
+}
 
-
+const renderers = {
+    '1': {
+        taskRenderer: CustomTaskRenderer
+    }
 }
 
 function App() {
@@ -52,9 +61,9 @@ function App() {
     const todoRef = useRef<any>();
     return (
         <>
-            <Stack sx={{position: 'absolute', height: '100%', width: '100%', backgroundColor: '#DADADA'}}
+            <Stack sx={{position: 'absolute', height: '100%', width: '100%'}}
                    alignItems='center'>
-                <Todos boards={boards} styles={styles} ref={todoRef}/>
+                <Todos boards={boards} styles={styles} renderers={renderers} ref={todoRef}/>
             </Stack>
         </>
     );

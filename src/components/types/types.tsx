@@ -21,15 +21,23 @@ export interface TodoBoardType {
     AddButton?: React.FunctionComponent<any>;
     TaskTextField?: React.FunctionComponent<any>;
     boardId: string,
-    tasks?: task[]
+    tasks?: task[],
 }
 
-interface styles {
-    [key: string]: CSS.Properties
+export interface styles {
+    [key: string]: CSS.Properties,
 }
 
+interface renderer {
+    [key: string]: React.FunctionComponent<any>;
+}
+
+interface renderers {
+    [key: string]: renderer
+}
 
 export interface TodosType {
     boards: todoBoard[],
-    styles?: styles
+    styles?: styles,
+    renderers?: renderers,
 }

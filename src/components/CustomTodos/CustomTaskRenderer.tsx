@@ -12,8 +12,8 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
     return (
         <Card sx={{
             height: '50px',
-            position: 'relative',
             m: 0.3,
+            position: 'relative',
             backgroundColor: '#FCFCFC',
         }}
               variant='outlined'
