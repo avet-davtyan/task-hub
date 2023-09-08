@@ -38,10 +38,10 @@ const boards = [
 
 const styles = {
     '1': {
-        border: '0px solid black',
+        border: '2px solid black',
     },
     '2': {
-        border: '0px solid red',
+        border: '2px solid black',
     },
 
 
@@ -56,10 +56,6 @@ function App() {
                    alignItems='center'>
                 <Todos boards={boards} styles={styles} ref={todoRef}/>
             </Stack>
-
-            <Button variant='contained' onClick={() => {
-                console.log(todoRef.current.getMyState())
-            }}>get task info</Button>
         </>
     );
 }

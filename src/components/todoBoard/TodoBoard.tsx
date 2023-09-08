@@ -9,31 +9,18 @@ import CustomAddButton from "./CustomAddButton";
 import CustomTextField from "./CustomTextField";
 // @ts-ignore
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
-
-type BoardStyle = CSSObject;
-
-interface task {
-    name: string,
-    task_id: number
-}
-
+import {task, todoBoard, TodoBoardType} from "../types/types";
 
 const TodoBoard = ({
-                       boardStyle = {} as any,
-                       todoBoards = [{
-                           board_id: '1',
-                           tasks: [
-                               {task_id: 1, name: 'firstBoard 1'},
-                               {task_id: 2, name: 'firstBoard 2'}
-                           ]
-                       }],
-                       setTodoBoards = '' as any,
+                       boardStyle,
+                       todoBoards,
+                       setTodoBoards,
                        TaskRenderer = CustomTaskRenderer,
                        AddButton = CustomAddButton,
                        TaskTextField = CustomTextField,
-                       boardId = 'defaultId',
-                       tasks = [{task_id: 1, name: 'task'}]
-                   }) => {
+                       boardId,
+                       tasks
+                   }: TodoBoardType) => {
 
 
     const [text, setText] = useState<string>('');
@@ -44,39 +31,30 @@ const TodoBoard = ({
 
     const AddTask = () => {
 
-        const addTask = {task_id: Math.random(), name: text};
-        const boardIndex = todoBoards.findIndex((board) => board.board_id === boardId);
+        const addTask: task = {task_id: Math.random(), name: text};
+        const boardIndex: number = todoBoards.findIndex((board: todoBoard) => board.board_id === boardId);
 
         if (boardIndex !== -1) {
-            const updatedBoard = {...todoBoards[boardIndex]};
+            const updatedBoard: todoBoard = {...todoBoards[boardIndex]};
             updatedBoard.tasks.push(addTask);
-            const updatedBoards = [...todoBoards];
+            const updatedBoards: todoBoard[] = [...todoBoards];
             updatedBoards[boardIndex] = updatedBoard;
             setTodoBoards(updatedBoards);
         }
     }
 
     const DeleteTask = (taskToDelete: any) => {
-        const boardIndex = todoBoards.findIndex((board) => board.board_id === boardId);
+        const boardIndex: number = todoBoards.findIndex((board: todoBoard) => board.board_id === boardId);
 
         if (boardIndex !== -1) {
-            // Clone the board to avoid directly modifying the state
-            const updatedBoard = {...todoBoards[boardIndex]};
-
-            // Find the index of the task to delete in the tasks array
-            const taskIndex = updatedBoard.tasks.findIndex(
-                (task) => task.task_id === taskToDelete.task_id
+            const updatedBoard: todoBoard = {...todoBoards[boardIndex]};
+            const taskIndex: number = updatedBoard.tasks.findIndex(
+                (task: task) => task.task_id === taskToDelete.task_id
             );
-
             if (taskIndex !== -1) {
-                // Remove the task from the tasks array
                 updatedBoard.tasks.splice(taskIndex, 1);
-
-                // Update the state with the modified board
-                const updatedBoards = [...todoBoards];
+                const updatedBoards: todoBoard[] = [...todoBoards];
                 updatedBoards[boardIndex] = updatedBoard;
-
-                // Set the state with the updated data
                 setTodoBoards(updatedBoards);
             }
         }
@@ -108,7 +86,7 @@ const TodoBoard = ({
                             ref={provided.innerRef}
 
                         >
-                            {tasks.map((task, index) => (
+                            {tasks && tasks.map((task, index) => (
                                 <Draggable key={task.task_id} draggableId={task?.task_id.toString()} index={index}>
                                     {(provided: any, snapshot: any) => (
                                         <div

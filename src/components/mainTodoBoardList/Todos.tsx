@@ -7,10 +7,11 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import {Button} from "@mui/material";
 
 import {flushSync} from "react-dom";
+import {todoBoard, TodosType} from "../types/types";
 
-const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any }, ref) => {
+const Todos = forwardRef(({boards, styles}: TodosType, ref) => {
 
-    const [todoBoards, setTodoBoards] = useState(boards);
+    const [todoBoards, setTodoBoards] = useState<todoBoard[]>(boards);
 
     useImperativeHandle(ref, () => ({
         getMyState: () => {
@@ -31,17 +32,11 @@ const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any
         );
 
         if (sourceBoard && destinationBoard) {
-            // Clone the source and destination boards to avoid directly modifying the state
+
             const updatedSourceBoard = {...sourceBoard};
             const updatedDestinationBoard = {...destinationBoard};
-
-            // Get the task from the source board
             const taskToMove = updatedSourceBoard.tasks.splice(source.index, 1)[0];
-
-            // Insert the task into the destination board at the specified index
             updatedDestinationBoard.tasks.splice(destination.index, 0, taskToMove);
-
-            // Update the state with the modified boards
             const updatedBoards = todoBoards.map((board: any) =>
                 board.board_id === source.board_id
                     ? updatedSourceBoard
@@ -50,7 +45,6 @@ const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any
                         : board
             );
 
-            // Set the state with the updated data
             flushSync(() => {
                 setTodoBoards(updatedBoards);
             });
@@ -63,7 +57,7 @@ const Todos = forwardRef(({boards = [], styles = []}: { boards: any, styles: any
             <DragDropContext onDragEnd={handleDragDrop}>
                 {todoBoards.map((todoBoard: any) => (
                     <TodoBoard key={todoBoard.board_id}
-                               boardStyle={styles[todoBoard?.board_id]}
+                               boardStyle={styles && styles[todoBoard?.board_id]}
                                tasks={todoBoard?.tasks}
                                boardId={todoBoard?.board_id}
                                todoBoards={todoBoards}
