@@ -85,7 +85,7 @@ function App() {
                                board_id: destination.droppableId
                            }
 
-                           const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source.board_id);
+                           const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source_board.board_id);
                            const destinationBoard: todoBoard | undefined = todoBoards.find(
                                (board: todoBoard) => board.board_id == destination_board.board_id
                            );
