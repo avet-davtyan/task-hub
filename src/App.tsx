@@ -4,6 +4,8 @@ import {Stack} from "@mui/material";
 import {Button} from "@mui/material";
 import {useRef} from "react";
 import CustomTaskRenderer from "./components/CustomTodos/CustomTaskRenderer";
+import CustomAddRenderer from "./components/CustomTodos/CustomAddRenderer";
+import CustomHeaderRenderer from "./components/CustomTodos/CustomHeaderRenderer";
 
 
 const boards = [
@@ -51,7 +53,9 @@ const styles = {
 
 const renderers = {
     '1': {
-        taskRenderer: CustomTaskRenderer
+        taskRenderer: CustomTaskRenderer,
+        addRenderer: CustomAddRenderer,
+        headerRenderer: CustomHeaderRenderer,
     }
 }
 

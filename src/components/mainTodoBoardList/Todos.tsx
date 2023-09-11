@@ -58,7 +58,9 @@ const Todos = forwardRef(({boards, styles, renderers}: TodosType, ref) => {
                 {todoBoards.map((todoBoard: todoBoard) => (
                     <TodoBoard key={todoBoard.board_id}
                                boardStyle={styles && styles[todoBoard?.board_id]}
+                               HeaderRenderer={renderers && renderers[todoBoard?.board_id]?.headerRenderer}
                                TaskRenderer={renderers && renderers[todoBoard?.board_id]?.taskRenderer}
+                               AddRenderer={renderers && renderers[todoBoard?.board_id]?.addRenderer}
                                tasks={todoBoard?.tasks}
                                boardId={todoBoard?.board_id}
                                todoBoards={todoBoards}

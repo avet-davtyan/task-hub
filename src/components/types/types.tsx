@@ -10,21 +10,24 @@ export interface task {
 export interface todoBoard {
     board_id: string;
     tasks: task[];
+
+    [key: string]: any;
 }
 
 
 export interface TodoBoardType {
-    boardStyle?: CSS.Properties,
-    todoBoards: todoBoard[],
-    setTodoBoards: React.Dispatch<React.SetStateAction<todoBoard[]>>,
+    boardStyle?: CSS.Properties;
+    todoBoards: todoBoard[];
+    setTodoBoards: React.Dispatch<React.SetStateAction<todoBoard[]>>;
+    HeaderRenderer?: React.FunctionComponent<any>;
     TaskRenderer?: React.FunctionComponent<any>;
     AddRenderer?: React.FunctionComponent<any>;
-    boardId: string,
-    tasks?: task[],
+    boardId: string;
+    tasks?: task[];
 }
 
 export interface styles {
-    [key: string]: CSS.Properties,
+    [key: string]: CSS.Properties;
 }
 
 interface renderer {
@@ -32,11 +35,11 @@ interface renderer {
 }
 
 interface renderers {
-    [key: string]: renderer
+    [key: string]: renderer;
 }
 
 export interface TodosType {
-    boards: todoBoard[],
-    styles?: styles,
-    renderers?: renderers,
+    boards: todoBoard[];
+    styles?: styles;
+    renderers?: renderers;
 }

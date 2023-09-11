@@ -2,7 +2,7 @@ import {Button, Stack, TextField} from "@mui/material";
 import {useState} from "react";
 import {task} from "../types/types";
 
-const DefaultAddRenderer = ({handleAddTask}: { handleAddTask: (task: task) => void }) => {
+const CustomAddRenderer = ({handleAddTask}: { handleAddTask: (task: task) => void }) => {
 
     const [taskName, setTaskName] = useState<string>('');
 
@@ -12,7 +12,7 @@ const DefaultAddRenderer = ({handleAddTask}: { handleAddTask: (task: task) => vo
                 <TextField size='small' sx={{width: 1}} onChange={(e) => {
                     setTaskName(e.target.value);
                 }}></TextField>
-                <Button variant='contained' onClick={() => {
+                <Button variant='outlined' onClick={() => {
                     const task = {task_id: Math.random(), name: taskName}
                     handleAddTask(task);
                 }}>Add</Button>
@@ -22,4 +22,4 @@ const DefaultAddRenderer = ({handleAddTask}: { handleAddTask: (task: task) => vo
 }
 
 
-export default DefaultAddRenderer;
+export default CustomAddRenderer;

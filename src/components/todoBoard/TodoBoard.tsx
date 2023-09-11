@@ -9,23 +9,19 @@ import DefaultTaskRenderer from "./DefaultTaskRenderer";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {task, todoBoard, TodoBoardType} from "../types/types";
 import DefaultAddRenderer from "./DefaultAddRenderer";
+import DefaultHeaderRenderer from "./DefaultHeaderRenderer";
 
 const TodoBoard = ({
                        boardStyle,
                        todoBoards,
                        setTodoBoards,
+                       HeaderRenderer,
                        TaskRenderer = DefaultTaskRenderer,
                        AddRenderer = DefaultAddRenderer,
                        boardId,
                        tasks
                    }: TodoBoardType) => {
-
-
-    const [text, setText] = useState<string>('');
-    const [showDelEdit, setShowDelEdit] = useState<boolean>(false);
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setText(e.target.value)
-    }
+    
 
     const AddTask = (task: task) => {
 
@@ -90,10 +86,10 @@ const TodoBoard = ({
             <Stack sx={{
                 width: '100%',
                 height: '100%'
-            }} spacing={3}>
+            }} spacing={0}>
 
+                {HeaderRenderer && <HeaderRenderer/>}
                 <AddRenderer handleAddTask={AddTask}/>
-                
                 <Droppable droppableId={boardId}>
                     {(provided: any, snapshot: any) => (
                         <Stack
