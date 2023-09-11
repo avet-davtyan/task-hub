@@ -4,12 +4,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {CSSObject} from '@emotion/react';
 import {useTheme} from "@mui/material";
-import DefaultTaskRenderer from "./DefaultTaskRenderer";
+import DefaultTaskRenderer from "./DefaultRenderers/DefaultTaskRenderer";
 // @ts-ignore
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
-import {task, todoBoard, TodoBoardType} from "../types/types";
-import DefaultAddRenderer from "./DefaultAddRenderer";
-import DefaultHeaderRenderer from "./DefaultHeaderRenderer";
+import {task, todoBoard, TodoBoardType} from "../types";
+import DefaultAddRenderer from "./DefaultRenderers/DefaultAddRenderer";
+import DefaultHeaderRenderer from "./DefaultRenderers/DefaultHeaderRenderer";
 
 const TodoBoard = ({
                        boardStyle,
@@ -21,7 +21,7 @@ const TodoBoard = ({
                        boardId,
                        tasks
                    }: TodoBoardType) => {
-    
+
 
     const AddTask = (task: task) => {
 

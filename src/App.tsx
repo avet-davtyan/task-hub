@@ -1,11 +1,11 @@
 import './App.css';
-import Todos from "./components/mainTodoBoardList/Todos";
+import Todos from "./lib/Todos";
 import {Stack} from "@mui/material";
 import {Button} from "@mui/material";
 import {useRef} from "react";
-import CustomTaskRenderer from "./components/CustomTodos/CustomTaskRenderer";
-import CustomAddRenderer from "./components/CustomTodos/CustomAddRenderer";
-import CustomHeaderRenderer from "./components/CustomTodos/CustomHeaderRenderer";
+import CustomTaskRenderer from "./CustomTodos/CustomTaskRenderer";
+import CustomAddRenderer from "./CustomTodos/CustomAddRenderer";
+import CustomHeaderRenderer from "./CustomTodos/CustomHeaderRenderer";
 
 
 const boards = [

@@ -4,7 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {CSSObject} from '@emotion/react';
 import {useTheme} from "@mui/material";
-import {task} from "../types/types";
+import {task} from "../../types";
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';

@@ -1,5 +1,5 @@
 import React, {useImperativeHandle, useState} from 'react';
-import TodoBoard from "../todoBoard/TodoBoard";
+import TodoBoard from "./todoBoard/TodoBoard";
 import {Stack} from '@mui/material';
 import {forwardRef} from "react";
 // @ts-ignore
@@ -7,7 +7,7 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import {Button} from "@mui/material";
 
 import {flushSync} from "react-dom";
-import {task, todoBoard, TodosType} from "../types/types";
+import {task, todoBoard, TodosType} from "./types";
 
 const Todos = forwardRef(({boards, styles, renderers}: TodosType, ref) => {
 

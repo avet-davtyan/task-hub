@@ -1,4 +1,4 @@
-import {todoBoard} from "../types/types";
+import {todoBoard} from "../lib/types";
 import {Stack, Typography} from '@mui/material';
 
 const CustomHeaderRenderer = () => {
