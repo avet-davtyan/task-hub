@@ -1,4 +1,3 @@
-import './App.css';
 import Todos from "./lib/Todos";
 import {Stack} from "@mui/material";
 import {Button} from "@mui/material";
@@ -53,7 +52,7 @@ const styles = {
 
 const renderers = {
     '1': {
-        taskRenderer: CustomTaskRenderer,
+        // taskRenderer: CustomTaskRenderer,
         addRenderer: CustomAddRenderer,
         headerRenderer: CustomHeaderRenderer,
     }
