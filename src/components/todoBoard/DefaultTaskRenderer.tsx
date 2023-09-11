@@ -13,7 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-const CustomTaskRenderer = ({task, handleDelete, handleUpdate}: {
+const DefaultTaskRenderer = ({task, handleDelete, handleUpdate}: {
     task: task, handleDelete: (taskToDelete: task) => void,
     handleUpdate: (taskToUpdate: task, updatedTask: task) => void
 }) => {
@@ -99,4 +99,4 @@ const CustomTaskRenderer = ({task, handleDelete, handleUpdate}: {
     )
 }
 
-export default CustomTaskRenderer;
+export default DefaultTaskRenderer;

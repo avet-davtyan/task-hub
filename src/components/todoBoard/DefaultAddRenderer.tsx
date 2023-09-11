@@ -3,7 +3,7 @@ import {useTheme} from "@mui/material";
 import {useState} from "react";
 import {task} from "../types/types";
 
-const AddPart = ({handleAddTask}: { handleAddTask: (task: task) => void }) => {
+const DefaultAddRenderer = ({handleAddTask}: { handleAddTask: (task: task) => void }) => {
 
     const theme = useTheme();
 
@@ -25,4 +25,4 @@ const AddPart = ({handleAddTask}: { handleAddTask: (task: task) => void }) => {
 }
 
 
-export default AddPart;
+export default DefaultAddRenderer;

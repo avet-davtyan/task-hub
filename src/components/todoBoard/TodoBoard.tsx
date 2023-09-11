@@ -4,19 +4,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {CSSObject} from '@emotion/react';
 import {useTheme} from "@mui/material";
-import CustomTaskRenderer from "./CustomTaskRenderer";
-import CustomAddButton from "./CustomAddButton";
-import CustomTextField from "./CustomTextField";
+import DefaultTaskRenderer from "./DefaultTaskRenderer";
 // @ts-ignore
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {task, todoBoard, TodoBoardType} from "../types/types";
-import AddPart from "./AddPart";
+import DefaultAddRenderer from "./DefaultAddRenderer";
 
 const TodoBoard = ({
                        boardStyle,
                        todoBoards,
                        setTodoBoards,
-                       TaskRenderer = CustomTaskRenderer,
+                       TaskRenderer = DefaultTaskRenderer,
+                       AddRenderer = DefaultAddRenderer,
                        boardId,
                        tasks
                    }: TodoBoardType) => {
@@ -92,12 +91,9 @@ const TodoBoard = ({
                 width: '100%',
                 height: '100%'
             }} spacing={3}>
-                {/*<Stack direction='row' spacing={1}>*/}
-                {/*    <TaskTextField handleChange={handleChange}/>*/}
-                {/*    <AddButton handleAddTask={AddTask}/>*/}
-                {/*</Stack>*/}
-                <AddPart handleAddTask={AddTask}/>
 
+                <AddRenderer handleAddTask={AddTask}/>
+                
                 <Droppable droppableId={boardId}>
                     {(provided: any, snapshot: any) => (
                         <Stack

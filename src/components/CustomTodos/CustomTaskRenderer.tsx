@@ -14,40 +14,45 @@ const CustomTaskRenderer = ({task, handleDelete}: { task: any, handleDelete: any
             height: '50px',
             margin: '5px',
             position: 'relative',
-            backgroundColor: '#FCFCFC',
-            border: '2px solid black',
-            borderRadius: '3px'
+            backgroundColor: '#E4E4E4',
+            color: '#5a5a5a',
+            borderRadius: '3px',
+            // boxShadow: 'rgba(0, 0, 0, 0.04) 0px 3px 5px'
 
         }}
 
+             onMouseEnter={() => {
+                 setShowEditDel(true);
+             }}
+             onMouseLeave={() => {
+                 setShowEditDel(false);
+             }}
         >
-            <Stack sx={{
-                width: '100%',
-                height: '100%',
-                paddingLeft: '10px'
-            }} justifyContent='center'>
-                <Typography color='text.secondary'>
-                    {task?.name}
-                </Typography>
+            <div style={{
+                position: 'absolute',
 
-                <Stack sx={{
-                    position: 'absolute',
-                    right: '0px',
-                    width: '100px',
-                    height: '100%',
-
-                }} direction='row'>
-                    <Button style={{width: '50%', minWidth: 0}}>
-                        <EditIcon style={{color: theme.palette.primary.main}}/>
-                    </Button>
-                    <Button style={{width: '50%', minWidth: 0}}
-                            onClick={() => {
-                                handleDelete(task);
-                            }}>
-                        <DeleteIcon style={{color: theme.palette.error.main}}/>
-                    </Button>
+                width: showEditDel ? '120px' : '0px',
+                height: '50px',
+                right: '0',
+                transition: 'all 0.2s',
+                borderRadius: '3px',
+                overflow: 'hidden'
+            }}>
+                <Stack direction='row' sx={{backgroundColor: 'red', overflow: 'hidden', height: '100%'}}>
+                    <Stack sx={{backgroundColor: '#1976d2', width: '100%'}}>
+                        edit
+                    </Stack>
+                    <Stack sx={{backgroundColor: '#ef5350', width: '100%'}}>
+                        delete
+                    </Stack>
                 </Stack>
-            </Stack>
+            </div>
+            <p style={{
+                marginLeft: '20px',
+                fontFamily: "sans-serif",
+                fontWeight: 'bold'
+            }}>{task?.name}</p>
+
         </div>
     )
 }

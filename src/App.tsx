@@ -20,21 +20,21 @@ const boards = [
             {task_id: 4, name: 'Visit the supermarket'}
         ]
     },
-    {
-        board_id: '3',
-        tasks: [
-            {task_id: 7, name: 'Book flights'},
-            {task_id: 8, name: 'Learn a new chord on the guitar'},
-            {task_id: 9, name: 'Take a 20-minute meditation break'}
-        ]
-    },
-    {
-        board_id: '4',
-        tasks: [
-            {task_id: 5, name: 'Research destination attractions'},
-            {task_id: 6, name: 'Pay credit card bill'}
-        ]
-    },
+    // {
+    //     board_id: '3',
+    //     tasks: [
+    //         {task_id: 7, name: 'Book flights'},
+    //         {task_id: 8, name: 'Learn a new chord on the guitar'},
+    //         {task_id: 9, name: 'Take a 20-minute meditation break'}
+    //     ]
+    // },
+    // {
+    //     board_id: '4',
+    //     tasks: [
+    //         {task_id: 5, name: 'Research destination attractions'},
+    //         {task_id: 6, name: 'Pay credit card bill'}
+    //     ]
+    // },
 ]
 
 const styles = {
@@ -42,7 +42,7 @@ const styles = {
         border: '0px solid black',
     },
     '2': {
-        border: '0px solid black',
+        border: '2px solid black',
     },
     '3': {
         border: '0px solid black',
