@@ -26,7 +26,7 @@ const Todos = forwardRef(({boards, styles, renderers, onTaskDrop}: TodosType, re
     const handleDragDrop = (result: any) => {
 
         if (onTaskDrop) {
-            onTaskDrop(result);
+            onTaskDrop(result.source, result.destination);
         } else {
             if (!result.destination || !result.source) return;
 

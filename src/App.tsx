@@ -74,32 +74,32 @@ function App() {
                        styles={styles}
                        renderers={renderers}
                        ref={todoRef}
-                       onTaskDrop={(result: any) => {
-                           if (!result.destination || !result.source) return;
+                       onTaskDrop={(source: any, destination: any) => {
+                           if (!destination || !source) return;
 
                            const todoBoards = todoRef.current.getState();
 
-                           const source = {index: result.source.index, board_id: result.source.droppableId}
-                           const destination = {
-                               index: result.destination.index,
-                               board_id: result.destination.droppableId
+                           const source_board = {index: source.index, board_id: source.droppableId}
+                           const destination_board = {
+                               index: destination.index,
+                               board_id: destination.droppableId
                            }
 
                            const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source.board_id);
                            const destinationBoard: todoBoard | undefined = todoBoards.find(
-                               (board: todoBoard) => board.board_id == destination.board_id
+                               (board: todoBoard) => board.board_id == destination_board.board_id
                            );
 
                            if (sourceBoard && destinationBoard) {
 
                                const updatedSourceBoard = {...sourceBoard};
                                const updatedDestinationBoard = {...destinationBoard};
-                               const taskToMove: task = updatedSourceBoard.tasks.splice(source.index, 1)[0];
-                               updatedDestinationBoard.tasks.splice(destination.index, 0, taskToMove);
+                               const taskToMove: task = updatedSourceBoard.tasks.splice(source_board.index, 1)[0];
+                               updatedDestinationBoard.tasks.splice(destination_board.index, 0, taskToMove);
                                const updatedBoards: todoBoard[] = todoBoards.map((board: any) =>
-                                   board.board_id === source.board_id
+                                   board.board_id === source_board.board_id
                                        ? updatedSourceBoard
-                                       : board.board_id === destination.board_id
+                                       : board.board_id === destination_board.board_id
                                            ? updatedDestinationBoard
                                            : board
                                );

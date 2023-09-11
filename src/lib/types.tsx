@@ -43,5 +43,5 @@ export interface TodosType {
     boards: todoBoard[];
     styles?: styles;
     renderers?: renderers;
-    onTaskDrop?: (result: any) => void;
+    onTaskDrop?: (source: any, destination: any) => void;
 }
