@@ -9,45 +9,53 @@ import {Button} from "@mui/material";
 import {flushSync} from "react-dom";
 import {task, todoBoard, TodosType} from "./types";
 
-const Todos = forwardRef(({boards, styles, renderers}: TodosType, ref) => {
+const Todos = forwardRef(({boards, styles, renderers, onTaskDrop}: TodosType, ref) => {
 
     const [todoBoards, setTodoBoards] = useState<todoBoard[]>(boards);
 
     useImperativeHandle(ref, () => ({
-        getMyState: () => {
+        getState: () => {
             return todoBoards
+        },
+        setState: (todoBoards: todoBoard[]) => {
+            setTodoBoards(todoBoards);
         }
+
     }), [todoBoards]);
 
     const handleDragDrop = (result: any) => {
 
-        if (!result.destination || !result.source) return;
+        if (onTaskDrop) {
+            onTaskDrop(result);
+        } else {
+            if (!result.destination || !result.source) return;
 
-        const source = {index: result.source.index, board_id: result.source.droppableId}
-        const destination = {index: result.destination.index, board_id: result.destination.droppableId}
+            const source = {index: result.source.index, board_id: result.source.droppableId}
+            const destination = {index: result.destination.index, board_id: result.destination.droppableId}
 
-        const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source.board_id);
-        const destinationBoard: todoBoard | undefined = todoBoards.find(
-            (board: todoBoard) => board.board_id == destination.board_id
-        );
-
-        if (sourceBoard && destinationBoard) {
-
-            const updatedSourceBoard = {...sourceBoard};
-            const updatedDestinationBoard = {...destinationBoard};
-            const taskToMove: task = updatedSourceBoard.tasks.splice(source.index, 1)[0];
-            updatedDestinationBoard.tasks.splice(destination.index, 0, taskToMove);
-            const updatedBoards: todoBoard[] = todoBoards.map((board: any) =>
-                board.board_id === source.board_id
-                    ? updatedSourceBoard
-                    : board.board_id === destination.board_id
-                        ? updatedDestinationBoard
-                        : board
+            const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source.board_id);
+            const destinationBoard: todoBoard | undefined = todoBoards.find(
+                (board: todoBoard) => board.board_id == destination.board_id
             );
 
-            flushSync(() => {
-                setTodoBoards(updatedBoards);
-            });
+            if (sourceBoard && destinationBoard) {
+
+                const updatedSourceBoard = {...sourceBoard};
+                const updatedDestinationBoard = {...destinationBoard};
+                const taskToMove: task = updatedSourceBoard.tasks.splice(source.index, 1)[0];
+                updatedDestinationBoard.tasks.splice(destination.index, 0, taskToMove);
+                const updatedBoards: todoBoard[] = todoBoards.map((board: any) =>
+                    board.board_id === source.board_id
+                        ? updatedSourceBoard
+                        : board.board_id === destination.board_id
+                            ? updatedDestinationBoard
+                            : board
+                );
+
+                flushSync(() => {
+                    setTodoBoards(updatedBoards);
+                });
+            }
         }
     }
 

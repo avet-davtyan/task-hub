@@ -5,6 +5,8 @@ import {useRef} from "react";
 import CustomTaskRenderer from "./CustomTodos/CustomTaskRenderer";
 import CustomAddRenderer from "./CustomTodos/CustomAddRenderer";
 import CustomHeaderRenderer from "./CustomTodos/CustomHeaderRenderer";
+import {task, todoBoard} from "./lib/types";
+import {flushSync} from "react-dom";
 
 
 const boards = [
@@ -58,14 +60,55 @@ const renderers = {
     }
 }
 
+
 function App() {
 
     const todoRef = useRef<any>();
+
+
     return (
         <>
             <Stack sx={{position: 'absolute', height: '100%', width: '100%', backgroundColor: '#DADADA'}}
                    alignItems='center'>
-                <Todos boards={boards} styles={styles} renderers={renderers} ref={todoRef}/>
+                <Todos boards={boards}
+                       styles={styles}
+                       renderers={renderers}
+                       ref={todoRef}
+                       onTaskDrop={(result: any) => {
+                           if (!result.destination || !result.source) return;
+
+                           const todoBoards = todoRef.current.getState();
+
+                           const source = {index: result.source.index, board_id: result.source.droppableId}
+                           const destination = {
+                               index: result.destination.index,
+                               board_id: result.destination.droppableId
+                           }
+
+                           const sourceBoard: todoBoard | undefined = todoBoards.find((board: todoBoard) => board.board_id == source.board_id);
+                           const destinationBoard: todoBoard | undefined = todoBoards.find(
+                               (board: todoBoard) => board.board_id == destination.board_id
+                           );
+
+                           if (sourceBoard && destinationBoard) {
+
+                               const updatedSourceBoard = {...sourceBoard};
+                               const updatedDestinationBoard = {...destinationBoard};
+                               const taskToMove: task = updatedSourceBoard.tasks.splice(source.index, 1)[0];
+                               updatedDestinationBoard.tasks.splice(destination.index, 0, taskToMove);
+                               const updatedBoards: todoBoard[] = todoBoards.map((board: any) =>
+                                   board.board_id === source.board_id
+                                       ? updatedSourceBoard
+                                       : board.board_id === destination.board_id
+                                           ? updatedDestinationBoard
+                                           : board
+                               );
+
+                               flushSync(() => {
+                                   todoRef.current.setState(updatedBoards);
+                               });
+                           }
+                       }}/>
             </Stack>
         </>
     );

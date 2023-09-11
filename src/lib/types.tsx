@@ -1,5 +1,6 @@
 import CSS from 'csstype'
 import React from "react";
+import * as dgram from "dgram";
 
 export interface task {
     task_id: number;
@@ -42,4 +43,5 @@ export interface TodosType {
     boards: todoBoard[];
     styles?: styles;
     renderers?: renderers;
+    onTaskDrop?: (result: any) => void;
 }
