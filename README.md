@@ -36,18 +36,15 @@ const boards = [
             {task_id: 3, name: 'Visit the supermarket'}
         ]
     }
+]
 ```
 
 ### Defining styles for boards
 
 ```jsx
 const styles = {
-    '1': {
-        border: '0px solid black',
-    },
-    '2': {
-        border: '2px solid black',
-    }
+    '1': {border: '0px solid black', padding: '10px'},
+    '2': {backgroundColor: '#3A4750'}
 }
 ```
 
@@ -66,5 +63,17 @@ const renderers = {
 ### Using Todos
 
 ```jsx
-<Todos boards={boards} styles={styles} renderers={renderers}/>
+<Todos
+    boards={boards}
+    styles={styles}
+    renderers={renderers}
+/>
 ```
+
+### Todos Props
+
+| Prop      | Value                                                                                                                                                 |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| boards    | Array of todoBoard <br> <pre>type todoBoard = {<br>board_id: string;<br>tasks: task[];<br>[key: string]: any; </br>} </pre>                           |
+| styles    | <pre>type styles = {<br>[key: string]: CSS.Properties;</br>} </pre>                                                                                   |
+| renderers | <pre>type renderer = {<br>[key: string]: React.FunctionComponent<any>;</br>} <br> <br>type renderers = {<br>[key: string]: renderer;</br>}</br></pre> |
