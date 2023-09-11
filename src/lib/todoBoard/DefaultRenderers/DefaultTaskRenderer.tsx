@@ -1,15 +1,13 @@
-import {Button, Card, Divider, Stack, TextField, Typography} from '@mui/material'
-import React, {ChangeEvent, useState} from "react";
+import {Button, Card, Stack, TextField, Typography} from '@mui/material'
+import React, {useState} from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {CSSObject} from '@emotion/react';
 import {useTheme} from "@mui/material";
 import {task} from "../../types";
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 

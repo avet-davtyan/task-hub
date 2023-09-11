@@ -1,9 +1,5 @@
-import {Button, Card, Divider, Stack, TextField, Typography} from '@mui/material'
-import React, {ChangeEvent, useState} from "react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import {CSSObject} from '@emotion/react';
-import {useTheme} from "@mui/material";
+import {Stack} from '@mui/material'
+import React from "react";
 import DefaultTaskRenderer from "./DefaultRenderers/DefaultTaskRenderer";
 // @ts-ignore
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';

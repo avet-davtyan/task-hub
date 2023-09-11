@@ -1,0 +1,11 @@
+{
+  "name": "react-beautiful-todos",
+  "version": "1.0.0",
+  "description": "The react-beautiful-todos npm package is a versatile and powerful React component that empowers developers to effortlessly create visually stunning and highly customizable todo boards within their web applications. With an array of features and styling options, this package simplifies the task of implementing todo lists while providing full control over the appearance and functionality of your boards.",
+  "main": "Todos.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
